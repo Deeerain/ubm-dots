@@ -1,5 +1,8 @@
 #!/bin/bash
 
-style=~/.config/wofi/style.css
-
-wofi --show drun -I -s
+wofi --show \
+  drun \
+  --prompt "" \
+  --allow-images \
+  --width 400 \
+  --location center

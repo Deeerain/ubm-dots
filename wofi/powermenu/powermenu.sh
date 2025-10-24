@@ -1,15 +1,51 @@
 #!/bin/bash
 
-style=~/.config/wofi/style.css
+style="~/.config/wofi/style.css"
+USER=$(whoami)
 
-# Только иконки (Nerd Fonts)
-options="\n\n\n"
+menu() {
+  echo " Выключить"
+  echo " Перезагрузить"
+  echo " Выйти"
+  echo " Спящий режим"
+  echo "  Режим гибернации"
+  echo " Заблокировать"
+  echo " Отмена"
+}
 
-chosen=$(echo -e "$options" | wofi --dmenu -j -b -L 1 -w 4 -s "$style")
+choice=$(
+  menu | wofi --show dmenu \
+    --prompt "Выберите действие:" \
+    --width 400 \
+    --height 300 \
+    --location center \
+    --hide-scrollbar \
+    --cache-file /dev/null
+)
 
-case "$chosen" in
-"") systemctl poweroff ;;
-"") systemctl reboot ;;
-"") systemctl suspend ;;
-"") hyprctl dispatch exit ;;
+case "$choice" in
+" Выключить")
+  confirm=$(echo -e "Да\nНет" | wofi --show dmenu --prompt="Выключить компьютер?")
+  [[ "$confirm" == "Да" ]] && systemctl poweroff
+  ;;
+" Перезагрузить")
+  confirm=$(echo -e "Да\nНет" | wofi --show dmenu --prompt="Перезагрузить компьютер?")
+  [[ "$confirm" == "Да" ]] && systemctl reboot
+  ;;
+" Выйти")
+  confirm=$(echo -e "Да\nНет" | wofi --show dmenu --prompt="Выйти из системы?")
+  [[ "$confirm" == "Да" ]] && pkill -u $USER
+  ;;
+" Спящий режим")
+  systemctl suspend
+  ;;
+" Режим гибернации")
+  systemctl hibernate
+  ;;
+" Заблокировать")
+  hyprlock
+  ;;
+*)
+  exit 0
+  ;;
 esac
