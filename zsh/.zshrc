@@ -1,4 +1,5 @@
 export ZSH="$HOME/.oh-my-zsh"
+export SUDO_EDITOR=vim
 
 ZSH_THEME="alanpeabody"
 
@@ -13,6 +14,7 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 alias vim='nvim'
+alias vi='nvim'
 
 alias top='btop'
 
