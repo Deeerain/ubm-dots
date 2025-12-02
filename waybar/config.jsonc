@@ -12,14 +12,22 @@
     "hyprland/workspaces"
   ],
   "modules-right": [
-    "keyboard-state",
-    "tray",
+    "hyprland/language",
     "network",
     "pulseaudio",
     "custom/separator",
     "clock",
+    "tray",
     "custom/powermenu"
   ],
+  "group-tray": {
+    "orientation": "horizontal",
+    "modules": ["tray"],
+    "drawer": {
+      "transition-duration": 500,
+      "children-class": "tray"
+    }
+  },
   "hyprland/workspaces": {
     "sort-by-name": true,
     "on-click": "activate",
@@ -48,7 +56,11 @@
   },
   "hyprland/window": {
     "max-length": 50,
-    "separate-outputs": true
+    "separate-outputs": true,
+    "format": "{initialTitle}",
+    "icon": true,
+    "icon-size": 20,
+    "max-length": "25"
   },
   "tray": {
     "icon-size": 14,
@@ -65,12 +77,11 @@
   "network": {
     "interval": 2,
     "format": "{ifname}",
-    "format-wifi": "",
+    "format-wifi": "󰖩",
     "format-ethernet": "",
     "tooltip-format-wifi": "{essid}"
   },
   "pulseaudio": {
-    // "scroll-step": 1, // %, can be a float
     "format": "{icon}",
     "format-bluetooth": "{icon} {volume}% {format_source}",
     "format-bluetooth-muted": " {format_source}",
@@ -91,8 +102,10 @@
     },
     "on-click": "pavucontrol"
   },
-  "keyboard-state": {
-    "format": "{name}"
+  "hyprland/language": {
+    "format": " {}",
+    "format-ru": "RU",
+    "format-en": "EN"
   },
   "custom/separator": {
     "format": "|",

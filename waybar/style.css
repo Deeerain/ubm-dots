@@ -28,4 +28,9 @@ window#waybar {
 
 #custom-powermenu {
   font-size: 20px;
+  color: #e78284;
+}
+
+#custom-logo {
+  color: #99d1db;
 }
