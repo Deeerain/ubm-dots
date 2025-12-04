@@ -1,9 +1,9 @@
-pkgname=my-dots
+pkgname=ubm-dots
 pkgver=0.1.0
 pkgrel=1
 pkgdesc="Personal dotfiles for Arch + Hyprland"
 arch=('any')
-url="https://github.com/Deeerain/my-dots"
+url="https://github.com/Deeerain/ubm-dots"
 makedepends=('git')
 depends=('hyprland'
   'hyprpaper'
@@ -22,9 +22,9 @@ optgepends=(
   'catppuccin-gtk-theme-frappe: Gtk theme (AUR)'
   'gdm: Gnome Display Manager'
   'cassette: Yandex Music Clinet (AUR)')
-source=("git+https://github.com/deeerain/my-dots.git")
+source=("git+https://github.com/deeerain/ubm-dots.git")
 sha256sums=('SKIP')
-install=my-dots.install
+install=ubm-dots.install
 
 package() {
   cd "$srcdir/$pkgname"
