@@ -1,0 +1,30 @@
+name: Quick Arch Build
+
+on:
+  push:
+    tags: ['v*']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: 🐋 Build with Docker
+      run: |
+        docker run --rm -v "$PWD:/pkg" archlinux:latest bash -c "
+          pacman -Syu --noconfirm --needed base-devel git sudo
+          useradd -m -G wheel -s /bin/bash builder
+          echo 'builder ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
+          cd /pkg
+          chown -R builder:builder .
+          su builder -c 'makepkg --syncdeps --noconfirm'
+        "
+        
+    - name: 📤 Upload to Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: "*.pkg.tar.zst"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
