@@ -1,5 +1,5 @@
 pkgname=ubm-dots
-pkgver=0.1.0
+pkgver=0.0.1
 pkgrel=1
 pkgdesc="Personal dotfiles for Arch + Hyprland"
 arch=('any')
@@ -22,7 +22,7 @@ optgepends=(
   'catppuccin-gtk-theme-frappe: Gtk theme (AUR)'
   'gdm: Gnome Display Manager'
   'cassette: Yandex Music Clinet (AUR)')
-source=("git+https://github.com/deeerain/ubm-dots.git")
+source=("git+https://github.com/deeerain/ubm-dots.git#tag=v$pkgver")
 sha256sums=('SKIP')
 install=ubm-dots.install
 
