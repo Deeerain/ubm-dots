@@ -1,43 +1,65 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/deeerain/my-dots/main/thumb/my-dots-banner.png" alt="Project Banner" width="800">
-</p>
-
-## Screenshots
+<details>
+<summary>📸 Скриншоты (нажмите чтобы развернуть) </summary>
 ![](./thumb/20251003_005237.png)
 ![](./thumb/20251003_005245.png)
 ![](./thumb/20251003_005300.png)
-## Requirements
-### Visual
+</details>
+
+## 🚀 Установка:
+
+### AUR
 ``` bash
-hyprland
+https://github.com/Deeerain/my-dots.git
 ```
 ``` bash
-hyprpaper
+cd my-dots
 ```
 ``` bash
-hyprlock
+makepkg -i
 ```
-``` bash
-nwg-look
-```
-``` bash
-sddm
-```
-``` bash
-grub2
-```
----
-### Screenshots
-``` bash
-grim
-```
-``` bash
-slurp
-```
----
-## Themes
-### Grub2
-Theme - [Graphite](https://github.com/Jacksaur/Gorgeous-GRUB)
-Graphite theme
-### SDDM
-Theme - [SilentSDDM](https://github.com/uiriansan/SilentSDDM)
+## 📄 Описанние
+
+<table style="width: 100%">
+    <tbody>
+        <tr>
+            <td>hyprland</td>
+            <td>Композитор</td>
+        </tr>
+        <tr>
+            <td>hyprpaper</td>
+            <td>Обои</td>
+        </tr>
+        <tr>
+            <td>hyprlock</td>
+            <td>Экран блокировки</td>
+        </tr>
+        <tr>
+            <td>mako</td>
+            <td>Уведомления</td>
+        </tr>
+        <tr>
+            <td>grim + slurp</td>
+            <td>Скриншоты</td>
+        </tr>
+        <tr>
+            <td>zsh</td>
+            <td>Шелл</td>
+        </tr>
+        <tr>
+            <td>exa</td>
+            <td>Замена ls</td>
+        </tr>
+        <tr>
+            <td>nwg-look</td>
+            <td>Управление GTK темой</td>
+        </tr>
+        <tr>
+            <td>gmd</td>
+            <td>Экран входа в систему</td>
+        </tr>
+        <tr>
+            <td>grub</td>
+            <td>Загрузчик [Graphite](https://github.com/Jacksaur/Gorgeous-GRUB)</td>
+        </tr>
+    <tbody>
+</table>
