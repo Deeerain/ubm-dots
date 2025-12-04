@@ -10,35 +10,54 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: 📥 Checkout repository
-      uses: actions/checkout@v4
-      
-    - name: 🏗️ Build Arch Linux package
+    - uses: actions/checkout@v4
+    
+    - name: 🐋 Build Arch package properly
       run: |
-        # Используем временную директорию чтобы избежать проблем с правами
-        docker run --rm \
-          -v "$(pwd):/source" \
-          -w /build \
-          archlinux:latest \
-          bash -c "
-            # Настройка системы
-            pacman -Syu --noconfirm --needed base-devel git
-            
-            # Копируем исходники во временную директорию
-            cp -r /source/. /build/
-            
-            # Собираем пакет (от имени root, но с флагом --nocheck)
-            cd /build
-            makepkg --syncdeps --noconfirm --clean
-            
-            # Копируем результат обратно
-            cp *.pkg.tar.zst /source/ 2>/dev/null || echo 'Пакет не создан'
-          "
+        docker run --rm -v "$PWD:/pkg" archlinux:latest bash -c "
+          # Устанавливаем зависимости
+          pacman -Syu --noconfirm --needed
+          pacman -S --noconfirm --needed base-devel git sudo
           
-    - name: 📤 Create Release
+          # Создаем НЕ-root пользователя для сборки
+          useradd -m -G wheel -s /bin/bash builder
+          echo 'builder ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
+          
+          # Копируем файлы в домашнюю директорию builder
+          cp -r /pkg/. /home/builder/
+          chown -R builder:builder /home/builder
+          
+          # Переходим под builder и собираем
+          cd /home/builder
+          su builder -c '
+            # Чистим git config если есть
+            git config --global --unset-all http.https://github.com/.extraheader 2>/dev/null || true
+            
+            # Собираем пакет
+            makepkg --syncdeps --noconfirm --clean --cleanbuild
+            
+            # Проверяем что создался
+            if ls *.pkg.tar.zst 1> /dev/null 2>&1; then
+              echo \"✅ Пакет создан успешно\"
+              # Копируем обратно в общую папку
+              cp *.pkg.tar.zst /pkg/
+            else
+              echo \"❌ Пакет не создан\"
+              exit 1
+            fi
+          '
+        "
+        
+    - name: 📦 Verify package was created
+      run: |
+        echo "Проверяем созданные пакеты..."
+        ls -la *.pkg.tar.zst || (echo "Пакеты не найдены!" && exit 1)
+        
+    - name: 🚀 Create GitHub Release
       if: startsWith(github.ref, 'refs/tags/')
       uses: softprops/action-gh-release@v1
       with:
         files: "*.pkg.tar.zst"
+        generate_release_notes: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
