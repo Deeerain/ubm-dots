@@ -1,5 +1,5 @@
 <details>
-<summary><h1>📸 Скриншоты (нажмите чтобы развернуть)</h1> </summary>
+<summary><h2>📸 Скриншоты (нажмите чтобы развернуть)</h2></summary>
 
 ![](./thumb/20251003_005237.png)
     
@@ -8,7 +8,8 @@
 ![](./thumb/20251003_005300.png)
 </details>
 
-## 🚀 Установка:
+<details>
+<summary><h2>🚀 Установка:</h2></summary>
 
 ### AUR
 ``` bash
@@ -20,8 +21,10 @@ cd my-dots
 ``` bash
 makepkg -i
 ```
-## 📄 Описанние
+</details>
 
+<details>
+<summary><h2>📄 Описанние</h2></summary>
 <table style="width: 100%">
     <tbody>
         <tr>
@@ -62,7 +65,8 @@ makepkg -i
         </tr>
         <tr>
             <td>grub</td>
-            <td>Загрузчик [Graphite](https://github.com/Jacksaur/Gorgeous-GRUB)</td>
+            <td>Загрузчик <a href="https://github.com/Jacksaur/Gorgeous-GRUB">Graphite</a></td>
         </tr>
     <tbody>
 </table>
+</details>
