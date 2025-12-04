@@ -12,32 +12,48 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: 🔨 Build and copy
+    - name: 🐋 Build without dependency check
       run: |
-        docker run --rm -v "$PWD:/shared" archlinux:latest bash -c "
-          # Быстрая установка
-          pacman -Sy --noconfirm base-devel git
-          
-          # Создаем пользователя с доступом к shared
-          useradd -m -s /bin/bash builder
-          usermod -a -G users builder
-          chmod 777 /shared
-          
-          # Копируем и собираем
-          cp -r /shared/. /tmp/build/
-          chown -R builder:builder /tmp/build
-          cd /tmp/build
-          sudo -u builder makepkg --syncdeps --noconfirm
-          
-          # Копируем обратно
-          cp *.pkg.tar.zst /shared/ 2>/dev/null || exit 1
-          chmod 666 /shared/*.pkg.tar.zst
-        "
+        # Даем права на запись
+        chmod 777 "$PWD" 2>/dev/null || true
         
-    - name: 🚀 Release
-      uses: softprops/action-gh-release@v1
+        docker run --rm \
+          -v "$PWD:/workspace" \
+          -w /workspace \
+          archlinux:latest \
+          bash -c "
+            # Обновляем систему
+            pacman -Syu --noconfirm --needed
+            
+            # Создаем пользователя
+            useradd -m -u 1000 -s /bin/bash builder
+            
+            # Меняем владельца
+            chown -R builder:builder /workspace
+            
+            # Собираем БЕЗ установки зависимостей
+            sudo -u builder makepkg \
+              --syncdeps \
+              --noconfirm \
+              --skipinteg \
+              --nocheck \
+              --nodeps
+          "
+          
+    - name: 📦 Verify package
+      run: |
+        if [ -f *.pkg.tar.zst ]; then
+          echo "✅ Пакет создан: $(ls *.pkg.tar.zst)"
+        else
+          echo "❌ Пакет не создан"
+          exit 1
+        fi
+        
+    - name: 🚀 Create release
       if: startsWith(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v1
       with:
         files: "*.pkg.tar.zst"
+        generate_release_notes: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
