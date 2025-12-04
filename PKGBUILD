@@ -7,6 +7,7 @@ url="https://github.com/Deeerain/my-dots"
 makedepends=('git')
 depends=('hyprland'
   'hyprpaper'
+  'hyprlock'
   'mako'
   'btop'
   'git'
@@ -17,7 +18,10 @@ depends=('hyprland'
   'zsh-syntax-highlighting'
   'exa'
   'nwg-look')
-optgepends=('catppuccin-gtk-theme-frappe: Gtk theme (AUR)')
+optgepends=(
+  'catppuccin-gtk-theme-frappe: Gtk theme (AUR)'
+  'gdm: Gnome Display Manager'
+  'cassette: Yandex Music Clinet (AUR)')
 source=("git+https://github.com/deeerain/my-dots.git")
 sha256sums=('SKIP')
 install=my-dots.install
