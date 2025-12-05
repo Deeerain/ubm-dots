@@ -17,7 +17,8 @@ depends=('hyprland'
   'zsh-autosuggestions'
   'zsh-syntax-highlighting'
   'exa'
-  'nwg-look')
+  'nwg-look'
+  'kitty')
 optgepends=(
   'catppuccin-gtk-theme-frappe: Gtk theme (AUR)'
   'gdm: Gnome Display Manager'
@@ -29,14 +30,14 @@ install=ubm-dots.install
 package() {
   cd "$srcdir/$pkgname"
 
-  # Hyprland and Hyprpaper
-  install -dm755 "$pkgdir/etc/skel/.config/hypr"
-  cp -r dots/hypr/* "$pkgdir/etc/skel/.config/hypr"
+  local install_dir="$pkgdir/etc/skel"
 
-  # Waybar
-  install -dm755 "$pkgdir/etc/skel/.config/waybar"
-  cp -r dots/waybar/* "$pkgdir/etc/skel/.config/waybar"
+  install -dm755 "$install_dir/.config/hypr"
+  install -dm755 "$install_dir/.config/waybar"
+  install -dm755 "$install_dir/.config/wofi"
+  install -dm755 "$install_dir/.config/mako/"
+  install -dm755 "$install_dir/.config/fastfetch"
+  install -dm755 "$install_dir/.config/kitty"
 
-  # Zsh
-  cp -r dots/.zshrc "$pkgdir/etc/skel/"
+  cp -rv dots/* "$install_dir"
 }
