@@ -1,3 +1,4 @@
 pkg
-my-dots
-*.zst
+src
+*.tar.zst
+ubm-dots
