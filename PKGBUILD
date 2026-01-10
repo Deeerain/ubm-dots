@@ -5,7 +5,8 @@ pkgdesc="Personal dotfiles for Arch + Hyprland"
 arch=('any')
 url="https://github.com/Deeerain/ubm-dots"
 makedepends=('git')
-depends=('hyprland'
+depends=(
+  'hyprland>=0.53.0'
   'hyprpaper'
   'hyprlock'
   'mako'
