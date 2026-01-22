@@ -21,7 +21,8 @@ depends=(
   'exa'
   'nwg-look'
   'kitty'
-  'python>=3.14')
+  'python>=3.14'
+  'python-typer')
 optgepends=(
   'catppuccin-gtk-theme-frappe: Gtk theme (AUR)'
   'gdm: Gnome Display Manager'
