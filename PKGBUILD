@@ -24,7 +24,7 @@ optgepends=(
   'catppuccin-gtk-theme-frappe: Gtk theme (AUR)'
   'gdm: Gnome Display Manager'
   'cassette: Yandex Music Clinet (AUR)')
-source=("git+https://github.com/deeerain/ubm-dots.git#tag=v$pkgver")
+source=("git+https://github.com/deeerain/ubm-dots.git#tag=v$pkgver-$pkgrel")
 sha256sums=('SKIP')
 install=ubm-dots.install
 
