@@ -7,7 +7,8 @@ url="https://github.com/Deeerain/ubm-dots"
 makedepends=('git')
 depends=(
   'hyprland>=0.53.0'
-  'hyprpaper'
+  'awww-git'
+  'oh-my-zsh-git'
   'hyprlock'
   'mako'
   'btop'
@@ -22,7 +23,10 @@ depends=(
   'nwg-look'
   'kitty'
   'python>=3.14'
-  'python-typer')
+  'python-typer>=0.21.1'
+  'ttf-jetbrains-mono-nerd'
+  'yay'
+  'base-devel')
 optgepends=(
   'catppuccin-gtk-theme-frappe: Gtk theme (AUR)'
   'gdm: Gnome Display Manager'
