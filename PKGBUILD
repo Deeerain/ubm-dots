@@ -7,8 +7,6 @@ url="https://github.com/Deeerain/ubm-dots"
 makedepends=('git')
 depends=(
   'hyprland>=0.53.0'
-  'awww-git'
-  'oh-my-zsh-git'
   'hyprlock'
   'mako'
   'btop'
@@ -24,13 +22,12 @@ depends=(
   'kitty'
   'python>=3.14'
   'python-typer>=0.21.1'
-  'ttf-jetbrains-mono-nerd'
-  'yay'
-  'base-devel')
+  'ttf-jetbrains-mono-nerd')
 optgepends=(
   'catppuccin-gtk-theme-frappe: Gtk theme (AUR)'
   'gdm: Gnome Display Manager'
-  'cassette: Yandex Music Clinet (AUR)')
+  'cassette: Yandex Music Clinet (AUR)'
+  'awww-git: Wallpapper engine (AUR)')
 source=("git+https://github.com/deeerain/ubm-dots.git#tag=v$pkgver-$pkgrel")
 sha256sums=('SKIP')
 
