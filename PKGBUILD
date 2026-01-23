@@ -34,10 +34,8 @@ sha256sums=('SKIP')
 package() {
   cd "$srcdir/$pkgname"
 
-  echo "$USER"
-
-  local install_dir="$pkgdir/etc/skel/$REAL_USER/"
-  local install_script_dir="$pkgdir/usr/bin/"
+  local install_dir="$pkgdir/usr/share/$pkgname"
+  mkdir -p "$pkgdir/usr/bin"
 
   install -dm755 "$install_dir/.config/hypr"
   install -dm755 "$install_dir/.config/waybar"
@@ -46,15 +44,15 @@ package() {
   install -dm755 "$install_dir/.config/fastfetch"
   install -dm755 "$install_dir/.config/kitty"
 
-  install -dm755 "$install_script_dir"
-
   cp -r dots/hypr "$install_dir/.config"
   cp -r dots/waybar "$install_dir/.config"
   cp -r dots/wofi "$install_dir/.config"
   cp -r dots/mako "$install_dir/.config"
   cp -r dots/fastfetch "$install_dir/.config"
   cp -r dots/kitty "$install_dir/.config"
-  cp -r ubm-dots.py "$install_script_dir/ubm-dots"
+  cp -r ubm-dots.py "$install_dir/ubm-dots.py"
 
   install -Dm664 dots/.zshrc "$install_dir"
+
+  ln -sf /usr/share/ubm-dots/ubm-dots.py "$pkgdir/usr/bin/ubm-dots"
 }
